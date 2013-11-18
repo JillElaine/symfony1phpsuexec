@@ -1,4 +1,4 @@
-Permissions for SE Linux: no world-readable files or directories.
+Permissions for phpsuexec Linux: no world-readable files or directories.
 
 Symfony is a complete framework designed to optimize the development of web applications by way of several key features.
 For starters, it separates a web application's business rules, server logic, and presentation views.
