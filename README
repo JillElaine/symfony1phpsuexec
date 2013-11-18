@@ -1,6 +1,7 @@
 Permissions for phpsuexec Linux: no world-readable files or directories.
 http://oldforum.symfony-project.org/index.php/m/43696/index.html
 http://trac.symfony-project.org/wiki/SymfonyPHPsuexec
+http://trac.symfony-project.org/ticket/3628
 
 Symfony is a complete framework designed to optimize the development of web applications by way of several key features.
 For starters, it separates a web application's business rules, server logic, and presentation views.
