@@ -1,7 +1,13 @@
 CHANGELOG
 =========
 
+11/18/13
+--------
+Fix typo in Doctrine implementation of the sfYamlParser
+https://github.com/symfony/symfony1/pull/17
+
 11/18/13:
+---------
 Replace all instances of dir & file permissions set to:
   * '0777' => '0755'
   * '0666' => '0644'
