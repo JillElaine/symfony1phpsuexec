@@ -1,3 +1,17 @@
+Modify permissions in symfony code to allow symfony 1.4 to run on servers with PHP suexec: dir permissions must not be less restrictive than 0755 and file permissions must not be less restrictive than 0644.
+
+Further information:
+--------------------
+http://trac.symfony-project.org/wiki/SymfonyPHPsuexec
+http://trac.symfony-project.org/ticket/3628
+
+Long discussion here:
+http://oldforum.symfony-project.org/index.php/m/45845/index.html
+
+Other symfony bugfixes and patches may be applied. See CHANGELOG for details.
+
+---------------------------------------
+
 Symfony is a complete framework designed to optimize the development of web applications by way of several key features.
 For starters, it separates a web application's business rules, server logic, and presentation views.
 It contains numerous tools and classes aimed at shortening the development time of a complex web application.
