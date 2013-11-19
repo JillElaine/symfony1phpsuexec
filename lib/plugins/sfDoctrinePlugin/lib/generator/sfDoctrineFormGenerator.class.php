@@ -78,7 +78,7 @@ class sfDoctrineFormGenerator extends sfGenerator
     {
       if (!is_dir($directory = dirname($file)))
       {
-        mkdir($directory, 0777, true);
+        mkdir($directory, 0755, true);
       }
 
       file_put_contents($file, $this->evalTemplate('sfDoctrineFormBaseTemplate.php'));
@@ -103,7 +103,7 @@ class sfDoctrineFormGenerator extends sfGenerator
 
       if (!is_dir($baseDir.'/base'))
       {
-        mkdir($baseDir.'/base', 0777, true);
+        mkdir($baseDir.'/base', 0755, true);
       }
 
       file_put_contents($baseDir.'/base/Base'.$model.'Form.class.php', $this->evalTemplate(null === $this->getParentModel() ? 'sfDoctrineFormGeneratedTemplate.php' : 'sfDoctrineFormGeneratedInheritanceTemplate.php'));
@@ -115,7 +115,7 @@ class sfDoctrineFormGenerator extends sfGenerator
         {
             if (!is_dir($pluginBaseDir))
             {
-              mkdir($pluginBaseDir, 0777, true);
+              mkdir($pluginBaseDir, 0755, true);
             }
             file_put_contents($classFile, $this->evalTemplate('sfDoctrineFormPluginTemplate.php'));
         }
@@ -136,7 +136,7 @@ class sfDoctrineFormGenerator extends sfGenerator
    * Get all the models which are a part of a plugin and the name of the plugin.
    * The array format is modelName => pluginName
    *
-   * @todo This method is ugly and is a very weird way of finding the models which 
+   * @todo This method is ugly and is a very weird way of finding the models which
    *       belong to plugins. If we could come up with a better way that'd be great
    * @return array $pluginModels
    */
@@ -167,14 +167,14 @@ class sfDoctrineFormGenerator extends sfGenerator
             if ($reflection->isSubClassOf($parent))
             {
               $this->pluginModels[$modelName] = $pluginName;
-              
+
               if ($reflection->isInstantiable())
               {
                 $generators = Doctrine_Core::getTable($modelName)->getGenerators();
                 foreach ($generators as $generator)
                 {
                   $this->pluginModels[$generator->getOption('className')] = $pluginName;
-                }  
+                }
               }
             }
           }
@@ -188,7 +188,7 @@ class sfDoctrineFormGenerator extends sfGenerator
   /**
    * Check to see if a model is part of a plugin
    *
-   * @param string $modelName 
+   * @param string $modelName
    * @return boolean $bool
    */
   public function isPluginModel($modelName)
@@ -199,7 +199,7 @@ class sfDoctrineFormGenerator extends sfGenerator
   /**
    * Get the name of the plugin a model belongs to
    *
-   * @param string $modelName 
+   * @param string $modelName
    * @return string $pluginName
    */
   public function getPluginNameForModel($modelName)
@@ -242,7 +242,7 @@ class sfDoctrineFormGenerator extends sfGenerator
    *
    * This method does not returns foreign keys that are also primary keys.
    *
-   * @return array An array composed of: 
+   * @return array An array composed of:
    *                 * The foreign table PHP name
    *                 * The foreign key PHP name
    *                 * A Boolean to indicate whether the column is required or not
@@ -336,7 +336,7 @@ class sfDoctrineFormGenerator extends sfGenerator
    * Returns a PHP string representing options to pass to a widget for a given column.
    *
    * @param sfDoctrineColumn $column
-   * 
+   *
    * @return string The options to pass to the widget as a PHP string
    */
   public function getWidgetOptionsForColumn($column)
@@ -656,7 +656,7 @@ class sfDoctrineFormGenerator extends sfGenerator
 
   /**
    * Returns the name of the model class this model extends.
-   * 
+   *
    * @return string|null
    */
   public function getParentModel()

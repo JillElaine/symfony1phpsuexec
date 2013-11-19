@@ -87,7 +87,7 @@ class Doctrine_Migration_Diff
     public function setTmpPath($tmpPath)
     {
         if ( ! is_dir($tmpPath)) {
-            mkdir($tmpPath, 0777, true);
+            mkdir($tmpPath, 0755, true);
         }
         $this->_tmpPath = $tmpPath;
     }
@@ -135,7 +135,7 @@ class Doctrine_Migration_Diff
     /**
      * Initialize some Doctrine models at a given path.
      *
-     * @param string $path 
+     * @param string $path
      * @return array $models
      */
     protected function _initializeModels($path)

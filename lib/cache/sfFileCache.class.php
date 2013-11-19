@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -185,7 +185,7 @@ class sfFileCache extends sfCache
     {
       return 0;
     }
-    
+
     $data = $this->read($path, self::READ_TIMEOUT | self::READ_LAST_MODIFIED);
 
     if ($data[self::READ_TIMEOUT] < time())
@@ -279,7 +279,7 @@ class sfFileCache extends sfCache
     if (!is_dir(dirname($path)))
     {
       // create directory structure if needed
-      mkdir(dirname($path), 0777, true);
+      mkdir(dirname($path), 0755, true);
     }
 
     $tmpFile = tempnam(dirname($path), basename($path));
@@ -305,7 +305,7 @@ class sfFileCache extends sfCache
       }
     }
 
-    chmod($path, 0666);
+    chmod($path, 0644);
     umask($current_umask);
 
     return true;
@@ -328,7 +328,7 @@ class sfFileCache extends sfCache
     if (!is_dir($cache_dir))
     {
       $current_umask = umask(0000);
-      @mkdir($cache_dir, 0777, true);
+      @mkdir($cache_dir, 0755, true);
       umask($current_umask);
     }
   }

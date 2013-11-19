@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -68,7 +68,7 @@ EOF;
    *
    * @param  string $app       Application name
    * @param  string $env       Enviroment name
-   * @param  string $period    Period 
+   * @param  string $period    Period
    * @param  string $history   History
    * @param  bool   $override  Override
    *
@@ -119,7 +119,7 @@ EOF;
       $this->getFilesystem()->touch($lockFile);
 
       // change mode so the web user can remove it if we die
-      $this->getFilesystem()->chmod($lockFile, 0777);
+      $this->getFilesystem()->chmod($lockFile, 0755);
 
       // if log file exists rotate it
       if (file_exists($srcLog))

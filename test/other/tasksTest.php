@@ -25,7 +25,7 @@ class sf_test_project
       rmdir($this->tmp_dir);
     }
 
-    mkdir($this->tmp_dir, 0777);
+    mkdir($this->tmp_dir, 0755);
 
     $this->current_dir = getcwd();
     chdir($this->tmp_dir);
@@ -152,13 +152,13 @@ $content = $c->execute_command('cache:clear');
 mkdir($c->tmp_dir.DS.'lib'.DS.'task');
 copy(dirname(__FILE__).'/fixtures/task/aTask.class.php', $c->tmp_dir.DS.'lib'.DS.'task'.DS.'aTask.class.php');
 copy(dirname(__FILE__).'/fixtures/task/zTask.class.php', $c->tmp_dir.DS.'lib'.DS.'task'.DS.'zTask.class.php');
-mkdir($pluginDir = $c->tmp_dir.DS.'plugins'.DS.'myFooPlugin'.DS.'lib'.DS.'task', 0777, true);
+mkdir($pluginDir = $c->tmp_dir.DS.'plugins'.DS.'myFooPlugin'.DS.'lib'.DS.'task', 0755, true);
 copy(dirname(__FILE__).'/fixtures/task/myPluginTask.class.php', $pluginDir.DS.'myPluginTask.class.php');
 file_put_contents(
-  $projectConfigurationFile = $c->tmp_dir.DS.'config'.DS.'ProjectConfiguration.class.php', 
+  $projectConfigurationFile = $c->tmp_dir.DS.'config'.DS.'ProjectConfiguration.class.php',
   str_replace(
-    '$this->enablePlugins(\'sfPropelPlugin\')', 
-    '$this->enablePlugins(array(\'myFooPlugin\', \'sfPropelPlugin\'))', 
+    '$this->enablePlugins(\'sfPropelPlugin\')',
+    '$this->enablePlugins(array(\'myFooPlugin\', \'sfPropelPlugin\'))',
     file_get_contents($projectConfigurationFile)
   )
 );

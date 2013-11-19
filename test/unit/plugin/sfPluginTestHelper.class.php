@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class sfPluginTestHelper
 {
@@ -13,7 +13,7 @@ class sfPluginTestHelper
 
     if (!is_dir(dirname($dest)))
     {
-      mkdir(dirname($dest), 0777, true);
+      mkdir(dirname($dest), 0755, true);
     }
 
     if (!file_exists(dirname(__FILE__).'/fixtures/'.$dir.'/'.$file))

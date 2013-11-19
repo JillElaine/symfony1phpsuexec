@@ -61,7 +61,7 @@ class sfDoctrineFormFilterGenerator extends sfDoctrineFormGenerator
     {
       if (!is_dir($directory = dirname($file)))
       {
-        mkdir($directory, 0777, true);
+        mkdir($directory, 0755, true);
       }
 
       file_put_contents($file, $this->evalTemplate('sfDoctrineFormFilterBaseTemplate.php'));
@@ -86,7 +86,7 @@ class sfDoctrineFormFilterGenerator extends sfDoctrineFormGenerator
 
       if (!is_dir($baseDir.'/base'))
       {
-        mkdir($baseDir.'/base', 0777, true);
+        mkdir($baseDir.'/base', 0755, true);
       }
 
       file_put_contents($baseDir.'/base/Base'.$model.'FormFilter.class.php', $this->evalTemplate(null === $this->getParentModel() ? 'sfDoctrineFormFilterGeneratedTemplate.php' : 'sfDoctrineFormFilterGeneratedInheritanceTemplate.php'));
@@ -98,7 +98,7 @@ class sfDoctrineFormFilterGenerator extends sfDoctrineFormGenerator
         {
             if (!is_dir($pluginBaseDir))
             {
-              mkdir($pluginBaseDir, 0777, true);
+              mkdir($pluginBaseDir, 0755, true);
             }
             file_put_contents($classFile, $this->evalTemplate('sfDoctrineFormFilterPluginTemplate.php'));
         }

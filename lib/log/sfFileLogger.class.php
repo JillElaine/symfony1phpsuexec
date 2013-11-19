@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -33,8 +33,8 @@ class sfFileLogger extends sfLogger
    *                You can use any support php wrapper. To write logs to the Apache error log, use php://stderr
    * - format:      The log line format (default to %time% %type% [%priority%] %message%%EOL%)
    * - time_format: The log time strftime format (default to %b %d %H:%M:%S)
-   * - dir_mode:    The mode to use when creating a directory (default to 0777)
-   * - file_mode:   The mode to use when creating a file (default to 0666)
+   * - dir_mode:    The mode to use when creating a directory (default to 0755)
+   * - file_mode:   The mode to use when creating a file (default to 0644)
    *
    * @param  sfEventDispatcher $dispatcher  A sfEventDispatcher instance
    * @param  array             $options     An array of options.
@@ -66,7 +66,7 @@ class sfFileLogger extends sfLogger
     $dir = dirname($options['file']);
     if (!is_dir($dir))
     {
-      mkdir($dir, isset($options['dir_mode']) ? $options['dir_mode'] : 0777, true);
+      mkdir($dir, isset($options['dir_mode']) ? $options['dir_mode'] : 0755, true);
     }
 
     $fileExists = file_exists($options['file']);
@@ -78,7 +78,7 @@ class sfFileLogger extends sfLogger
     $this->fp = fopen($options['file'], 'a');
     if (!$fileExists)
     {
-      chmod($options['file'], isset($options['file_mode']) ? $options['file_mode'] : 0666);
+      chmod($options['file'], isset($options['file_mode']) ? $options['file_mode'] : 0644);
     }
 
     return parent::initialize($dispatcher, $options);

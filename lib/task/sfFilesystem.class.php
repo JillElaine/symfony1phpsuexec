@@ -83,7 +83,7 @@ class sfFilesystem
    *
    * @return bool true if the directory has been created, false otherwise
    */
-  public function mkdirs($path, $mode = 0777)
+  public function mkdirs($path, $mode = 0755)
   {
     if (is_dir($path))
     {
@@ -402,7 +402,7 @@ class sfFilesystem
    * @param string $to   The target directory
    *
    * @return string
-   */ 
+   */
   protected function calculateRelativeDir($from, $to)
   {
     $from = $this->canonicalizePath($from);

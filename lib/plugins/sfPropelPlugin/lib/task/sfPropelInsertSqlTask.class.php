@@ -107,11 +107,11 @@ EOF;
 
     $this->tmpDir = sys_get_temp_dir().'/propel_insert_sql_'.rand(11111, 99999);
     register_shutdown_function(array($this, 'removeTmpDir'));
-    mkdir($this->tmpDir, 0777, true);
+    mkdir($this->tmpDir, 0755, true);
     foreach ($sqls as $connection => $files)
     {
       $dir = $this->tmpDir.'/'.$connection;
-      mkdir($dir, 0777, true);
+      mkdir($dir, 0755, true);
 
       $content = '';
       foreach ($files as $file)

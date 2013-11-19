@@ -66,7 +66,7 @@ class sfPropelFormFilterGenerator extends sfPropelFormGenerator
     {
       if (!is_dir($directory = dirname($file)))
       {
-        mkdir($directory, 0777, true);
+        mkdir($directory, 0755, true);
       }
 
       file_put_contents($file, $this->evalTemplate('sfPropelFormFilterBaseTemplate.php'));
@@ -95,7 +95,7 @@ class sfPropelFormFilterGenerator extends sfPropelFormGenerator
 
       if (!is_dir($baseDir.'/base'))
       {
-        mkdir($baseDir.'/base', 0777, true);
+        mkdir($baseDir.'/base', 0755, true);
       }
 
       file_put_contents($baseDir.'/base/Base'.$table->getClassname().'FormFilter.class.php', $this->evalTemplate('sfPropelFormFilterGeneratedTemplate.php'));

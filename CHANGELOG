@@ -1,6 +1,47 @@
 CHANGELOG
 =========
 
+11/18/13:
+Replace all instances of dir & file permissions set to:
+  * '0777' => '0755'
+  * '0666' => '0644'
+
+List of modified files:
+-----------------------
+ * /data/bin/sandbox_installer.php
+ * /lib/cache/sfFileCache.class.php
+ * /lib/cache/sfSQLiteCache.class.php
+ * /lib/config/sfConfigCache.class.php
+ * /lib/generator/sfGeneratorManager.class.php
+ * /lib/i18n/sfMessageSource_gettext.class.php
+ * /lib/i18n/sfMessageSource_XLIFF.class.php
+ * /lib/log/sfFileLogger.class.php
+ * /lib/plugin/sfPearEnvironment.class.php
+ * /lib/plugins/sfDoctrinePlugin/lib/generator/sfDoctrineFormFilterGenerator.class.php
+ * /lib/plugins/sfDoctrinePlugin/lib/generator/sfDoctrineFormGenerator.class.php
+ * /lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Migration/Diff.php
+ * /lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Lib.php
+ * /lib/plugins/sfPropelPlugin/lib/generator/sfPropelFormFilterGenerator.class.php
+ * /lib/plugins/sfPropelPlugin/lib/generator/sfPropelFormGenerator.class.php
+ * /lib/plugins/sfPropelPlugin/lib/task/sfPropelInsertSqlTask.class.php
+ * /lib/plugins/sfPropelPlugin/lib/vendor/phing/lib/Zip.php
+ * /lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/FileSystem.php
+ * /lib/plugins/sfPropelPlugin/lib/vendor/phing/system/io/PhingFile.php
+ * /lib/storage/sfSessionTestStorage.class.php
+ * /lib/task/cache/sfCacheClearTask.class.php
+ * /lib/task/log/sfLogRotateTask.class.php
+ * /lib/task/project/sfProjectPermissionsTask.class.php
+ * /lib/task/sfFilesystem.class.php
+ * /lib/validator/sfValidatedFile.class.php
+ * /lib/vendor/swiftmailer/classes/Swift/FileSpool.php
+ * /test/bootstrap/task.php
+ * /test/bootstrap/unit.php
+ * /test/other/tasksTest.php
+ * /test/unit/plugin/sfPearEnvironmentTest.php
+ * /test/unit/plugin/sfPearRestPluginTest.php
+ * /test/unit/plugin/sfPluginManagerTest.php
+ * /test/unit/plugin/sfPluginTestHelper.class.php
+
 11/25/12: Versions 1.4.20
 -------------------------
 

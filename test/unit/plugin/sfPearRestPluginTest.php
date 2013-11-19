@@ -17,7 +17,7 @@ $t = new lime_test(5);
 @include_once('PEAR.php');
 if (!class_exists('PEAR'))
 {
-  $t->skip('PEAR must be installed', 5); 
+  $t->skip('PEAR must be installed', 5);
   return;
 }
 
@@ -28,7 +28,7 @@ require_once dirname(__FILE__).'/sfPluginTestHelper.class.php';
 // setup
 $temp = tempnam('/tmp/sf_plugin_test', 'tmp');
 unlink($temp);
-mkdir($temp, 0777, true);
+mkdir($temp, 0755, true);
 
 define('SF_PLUGIN_TEST_DIR', $temp);
 

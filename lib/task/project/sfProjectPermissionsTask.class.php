@@ -3,7 +3,7 @@
 /*
  * This file is part of the symfony package.
  * (c) Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -45,12 +45,12 @@ EOF;
   {
     if (file_exists(sfConfig::get('sf_upload_dir')))
     {
-      $this->chmod(sfConfig::get('sf_upload_dir'), 0777);
+      $this->chmod(sfConfig::get('sf_upload_dir'), 0755);
     }
 
-    $this->chmod(sfConfig::get('sf_cache_dir'), 0777);
-    $this->chmod(sfConfig::get('sf_log_dir'), 0777);
-    $this->chmod(sfConfig::get('sf_root_dir').'/symfony', 0777);
+    $this->chmod(sfConfig::get('sf_cache_dir'), 0755);
+    $this->chmod(sfConfig::get('sf_log_dir'), 0755);
+    $this->chmod(sfConfig::get('sf_root_dir').'/symfony', 0755);
 
     $dirs = array(
       sfConfig::get('sf_cache_dir'),
@@ -63,8 +63,8 @@ EOF;
 
     foreach ($dirs as $dir)
     {
-      $this->chmod($dirFinder->in($dir), 0777);
-      $this->chmod($fileFinder->in($dir), 0666);
+      $this->chmod($dirFinder->in($dir), 0755);
+      $this->chmod($fileFinder->in($dir), 0644);
     }
 
     // note those files that failed
@@ -79,11 +79,11 @@ EOF;
 
   /**
    * Chmod and capture any failures.
-   * 
+   *
    * @param string  $file
    * @param integer $mode
    * @param integer $umask
-   * 
+   *
    * @see sfFilesystem
    */
   protected function chmod($file, $mode, $umask = 0000)
@@ -109,7 +109,7 @@ EOF;
 
   /**
    * Captures those chmod commands that fail.
-   * 
+   *
    * @see http://www.php.net/set_error_handler
    */
   public function handleError($no, $string, $file, $line, $context)
