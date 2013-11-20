@@ -1,10 +1,17 @@
 CHANGELOG
 =========
 
+11/19/13
+--------
+preg_replace /e modifier deprecated as of PHP5.4
+  /lib/response/sfWebResponse.class.php
+Thanks to https://github.com/jpgerdeman/symfony1/commit/59875eaed9ed060ecc40a788da44179638e38a75
+
 11/18/13
 --------
 Fix typo in Doctrine implementation of the sfYamlParser
-https://github.com/symfony/symfony1/pull/17
+  /lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Parser/sfYaml/sfYamlParser.php
+Thanks to https://github.com/symfony/symfony1/pull/17
 
 11/18/13:
 ---------
