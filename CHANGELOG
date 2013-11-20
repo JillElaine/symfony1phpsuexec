@@ -11,7 +11,7 @@ Thanks to https://github.com/jpgerdeman/symfony1/commit/59875eaed9ed060ecc40a788
 --------
 Fix typo in Doctrine implementation of the sfYamlParser
   /lib/plugins/sfDoctrinePlugin/lib/vendor/doctrine/Doctrine/Parser/sfYaml/sfYamlParser.php
-Thanks to https://github.com/symfony/symfony1/pull/17
+Thanks to https://github.com/theodo/symfony1/commit/4de52bff690218a56c03a382b7e339b54d97e321
 
 11/18/13:
 ---------
