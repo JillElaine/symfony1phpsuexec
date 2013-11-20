@@ -404,10 +404,29 @@ class sfWebResponse extends sfResponse
    *
    * @return string Normalized header
    */
+   /*
+    https://github.com/jpgerdeman/symfony1/commit/59875eaed9ed060ecc40a788da44179638e38a75
+    preg_replace /e modifier deprecated as of PHP5.4
+    The /e modifier was deprecated in PHP5.4 and results in warnings.
+    Use preg_replace_callback instead. Don't use anonymous function to preserve backwards compatibility.
+   */
   protected function normalizeHeaderName($name)
   {
-    return preg_replace('/\-(.)/e', "'-'.strtoupper('\\1')", strtr(ucfirst(strtolower($name)), '_', '-'));
+    //return preg_replace('/\-(.)/e', "'-'.strtoupper('\\1')", strtr(ucfirst(strtolower($name)), '_', '-'));
+    return preg_replace_callback('/\-(.)/', array($this, 'normalizeHeaderCallback'), strtr(ucfirst(strtolower($name)), '_', '-'));
   }
+
+  /**
+  * Callback for the normalizeHeader function.
+  *
+  * @param string[] $text a regular expression mtch
+  *
+  * @return string the text in capital letters and leading dash
+  */
+    protected static function normalizeHeaderCallback( $text )
+    {
+      return '-'.strtoupper($text[0]);
+    }
 
   /**
    * Retrieves a formated date.
