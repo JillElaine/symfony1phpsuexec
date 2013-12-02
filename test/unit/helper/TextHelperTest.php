@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /*
  * This file is part of the symfony package.
@@ -13,7 +13,7 @@ require_once(dirname(__FILE__).'/../../../test/bootstrap/unit.php');
 require_once(dirname(__FILE__).'/../../../lib/helper/TagHelper.php');
 require_once(dirname(__FILE__).'/../../../lib/helper/TextHelper.php');
 
-$t = new lime_test(56);
+$t = new lime_test(62);
 
 // truncate_text()
 $t->diag('truncate_text()');
@@ -42,7 +42,7 @@ $t->is(truncate_text($text, 15, '...', true), $truncated_true, 'text_truncate() 
 if(extension_loaded('mbstring'))
 {
   $oldEncoding = mb_internal_encoding();
-  $t->is(truncate_text('のビヘイビアにパラメーターを渡すことで特定のモデルでのフォーム生成を無効にできます', 11), 'のビヘイビアにパ...', 'text_truncate() handles unicode characters using mbstring if available');
+  $t->is(truncate_text('ã�®ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢ã�«ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã‚’æ¸¡ã�™ã�“ã�¨ã�§ç‰¹å®šã�®ãƒ¢ãƒ‡ãƒ«ã�§ã�®ãƒ•ã‚©ãƒ¼ãƒ ç”Ÿæˆ�ã‚’ç„¡åŠ¹ã�«ã�§ã��ã�¾ã�™', 11), 'ã�®ãƒ“ãƒ˜ã‚¤ãƒ“ã‚¢ã�«ãƒ‘...', 'text_truncate() handles unicode characters using mbstring if available');
   $t->is(mb_internal_encoding(), $oldEncoding, 'text_truncate() sets back the internal encoding in case it changes it');
 }
 else
@@ -114,6 +114,10 @@ $t->is(strip_links_text('<a href="first.html">first</a> and <a href="second.html
 $t->diag('auto_link_text()');
 $email_raw = 'fabien.potencier@symfony-project.com';
 $email_result = '<a href="mailto:'.$email_raw.'">'.$email_raw.'</a>';
+$email2_raw = 'user@utf8-локалхост.локал';
+$email2_result = '<a href="mailto:'.$email2_raw.'">'.$email2_raw.'</a>';
+$email3_raw = 'myemail@dept.example.com';
+$email3_result = '<a href="mailto:'.$email3_raw.'">'.$email3_raw.'</a>';
 $link_raw = 'http://www.google.com';
 $link_result = '<a href="'.$link_raw.'">'.$link_raw.'</a>';
 $link2_raw = 'www.google.com';
@@ -136,3 +140,9 @@ $t->is(auto_link_text('<p>http://twitter.com/#!/fabpot</p>'),'<p><a href="http:/
 $t->is(auto_link_text('<p>http://twitter.com/#!/fabpot is Fabien Potencier on Twitter</p>'),'<p><a href="http://twitter.com/#!/fabpot">http://twitter.com/#!/fabpot</a> is Fabien Potencier on Twitter</p>',"auto_link_text() converts URLs with complex fragments and trailing text to links");
 $t->is(auto_link_text('hello '.$email_result, 'email_addresses'), 'hello '.$email_result, "auto_link_text() does not double-link emails");
 $t->is(auto_link_text('<p>Link '.$link_result.'</p>'), '<p>Link '.$link_result.'</p>', "auto_link_text() does not double-link emails");
+$t->is(auto_link_text('<div>text w/o trailing space</div>'.$email_raw, 'email_addresses'), '<div>text w/o trailing space</div>'.$email_result, 'auto_link_text() converts emails to links');
+$t->is(auto_link_text('http://root@localhost.local', 'email_addresses'), 'http://root@localhost.local', 'auto_link_text() converts emails to links');
+$t->is(auto_link_text('Fabien <'.$email_raw.'>', 'email_addresses'), 'Fabien <'.$email_result.'>', 'auto_link_text() converts emails to links');
+$t->is(auto_link_text($email2_raw, 'email_addresses_unicode'), $email2_result, 'auto_link_text() converts emails to links');
+$t->is(auto_link_text($email3_raw, 'email_addresses'), $email3_result, 'auto_link_text() converts emails to links');
+$t->is(auto_link_text($email3_result, 'email_addresses'), $email3_result, 'auto_link_text() converts emails to links');

@@ -1,5 +1,13 @@
 CHANGELOG
 =========
+12/1/13
+-------
+http://trac.symfony-project.org/ticket/10065
+Fix email address with no leading space not linked.
+Add option for unicode characters in email username
+  /lib/helper/TextHelper.php
+  /test/unit/helper/TextHelperTest.php
+Thanks to frost-nzcr4
 
 11/19/13
 --------

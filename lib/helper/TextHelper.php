@@ -185,7 +185,7 @@ function simple_format_text($text, $options = array())
 
 /**
  * Turns all urls and email addresses into clickable links. The +link+ parameter can limit what should be linked.
- * Options are :all (default), :email_addresses, and :urls.
+ * Options are :all (default), :email_addresses, :email_addresses_unicode, and :urls.
  *
  * Example:
  *   auto_link("Go to http://www.symfony-project.com and say hello to fabien.potencier@example.com") =>
@@ -201,6 +201,10 @@ function auto_link_text($text, $link = 'all', $href_options = array(), $truncate
   else if ($link == 'email_addresses')
   {
     return _auto_link_email_addresses($text);
+  }
+  else if ($link == 'email_addresses_unicode')
+  {
+    return _auto_link_email_addresses($text, true);
   }
   else if ($link == 'urls')
   {
@@ -279,14 +283,45 @@ function _auto_link_urls($text, $href_options = array(), $truncate = false, $tru
 }
 
 /**
- * Turns all email addresses into clickable links.
+ * Turns email addresses into clickable links.
+ * Ignores email addresses that are already linked.
+ * Option 'is_unicode' allows unicode characters in username if set to true
  */
-function _auto_link_email_addresses($text)
-{
-  // Taken from http://snippets.dzone.com/posts/show/6156
-  return preg_replace("#(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $text);
+  public static function auto_link_email_address($text, $is_unicode = false)
+  {
+    if (false === strpos($text, '@')) //quick check
+      {
+        return $text;
+      }
 
-  // Removed since it destroys already linked emails 
-  // Example:   <a href="mailto:me@example.com">bar</a> gets <a href="mailto:me@example.com">bar</a> gets <a href="mailto:<a href="mailto:me@example.com">bar</a>
-  //return preg_replace('/([\w\.!#\$%\-+.]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+)/', '<a href="mailto:\\1">\\1</a>', $text);
-}
+    /*
+      Allowed username characters: upper & lowercase letters and digits 0-9
+        and special characters: ! # $ % & ' * + - / = ? ^ _ ` { } | ~
+      Other special characters are allowed with restrictions. They are:
+        Space and "(),:;<>@[\] (ASCII: 32, 34, 40, 41, 44, 58, 59, 60, 62, 64, 91–93)
+        The restrictions for these special characters are that they must only be used when contained between quotation marks,
+        and that 2 of them (the backslash \ and quotation mark " (ASCII: 92, 34)) must also be preceded by a backslash \ (e.g. "\\\"").
+       Source: http://en.wikipedia.org/wiki/Email_address
+    */
+    $allowedUsernameChars = ($is_unicode ? '\p{L}\p{Nd}' : '\w'); // '\w' = [a-zA-Z0-9\_] (letters, digits, underscore)
+
+    $allowedUsernameChars .= '\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\}\|\~\.'; // extended allowed username chars
+
+    /*
+      Allowed hostname characters: letters, digits 0-9 and a dash
+        'words' (labels) separated by a dot
+    */
+    $allowedHostnameChars = 'a-zA-Z0-9\-\.';
+
+    return preg_replace('~
+      (?<!mailto:|://) # no previous mailto: or ://
+      (?<!['.$allowedUsernameChars.']) # no previous valid email chars
+      (['.$allowedUsernameChars.']+) # valid username chars
+      @
+      (['.$allowedHostnameChars.']+) # valid hostname chars
+      (?!['.$allowedHostnameChars.']) # no following valid hostname chars
+      (?!</a>) # no trailing </a>
+      ~ixu',
+      '<a href="mailto:\1@\2">\1@\2</a>',
+      $text);
+  }
